@@ -52,13 +52,8 @@ namespace AddressBook.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Index(int id)
+        public IActionResult Index()
         {
-            if (Convert.ToBoolean(id))
-            {
-                return RedirectToAction("ContactDetails", new { id });
-            }
-
             Contact contact = _contactServices.GetContactsList().FirstOrDefault();
 
             if (contact != null)
