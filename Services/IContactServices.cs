@@ -13,5 +13,7 @@ namespace AddressBook.Services
         Contact GetContactById(int id);
 
         List<Contact> GetContactsList();
+
+        bool DoesContactExist(int id);
     }
 }

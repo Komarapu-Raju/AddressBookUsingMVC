@@ -9,7 +9,11 @@
     <div class="contact-form-modal" id="contactFormContainer">
         <div class="modal-content" id="modalContent">
             <span class="close-btn" id="close"><a href="/Contact/CloseForm" style="text-decoration:none">&times;</a></span>
-            <form class="contact-form" id="contactForm" method="post">
+            <form class="contact-form" id="contactForm" asp-controller="Contact" asp-action="ContactForm" method="post">
+                @if( Model!=null && Model.Id != 0)
+                {
+                    <input type="hidden" asp-for="Id">
+                }
                 <div class="form-field">
                     <label asp-for="Name">Name<span asp-validation-for="Name" class="mandatory-field"></span></label>
                     <input type="text" asp-for="Name" id="name" name="name">

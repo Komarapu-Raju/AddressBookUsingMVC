@@ -13,32 +13,32 @@ namespace AddressBook.Controllers
             _contactServices = contactServices;
         }
 
-        public IActionResult ContactForm(int id)
+        public IActionResult AddContact()
         {
-            if (!Convert.ToBoolean(id))
-            {
-                return View();
-            }
+            return View("ContactForm");
+        }
 
-            return View(_contactServices.GetContactById(id));
+        public IActionResult EditContact(int id)
+        {
+            return View("ContactForm",_contactServices.GetContactById(id));
         }
 
         [HttpPost]
-        public IActionResult ContactForm(Contact Contact)
+        public IActionResult ContactForm(Contact contact)
         {
             if (ModelState.IsValid)
             {
-                if (!Convert.ToBoolean(Contact.Id))
+                if (_contactServices.DoesContactExist(contact.Id))
                 {
-                    _contactServices.AddContact(Contact);
-                    return RedirectToAction("ContactDetails", new { _contactServices.GetContactsList().Last<Contact>().Id });
+                    _contactServices.UpdateContact(contact);
+                    return RedirectToAction("ContactDetails", new { contact.Id });
                 }
 
-                _contactServices.UpdateContact(Contact);
-                return RedirectToAction("ContactDetails", new { Contact.Id });
+                _contactServices.AddContact(contact);
+                return RedirectToAction("ContactDetails", new { _contactServices.GetContactsList().Last<Contact>().Id });
             }
 
-            return View();
+            return View(contact);
         }
 
         public IActionResult ContactDetails(int id)

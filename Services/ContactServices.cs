@@ -43,5 +43,10 @@ namespace AddressBook.Services
             var sql = "SELECT * FROM ContactsTable";
             return _sqlConnection.Query<Contact>(sql).ToList();
         }
+
+        public bool DoesContactExist(int id)
+        {
+            return GetContactsList().Any(contact => contact.Id== id);
+        }
     }
 }
