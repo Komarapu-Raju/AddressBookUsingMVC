@@ -1,0 +1,18 @@
+﻿@{
+    var contactList = ViewData["contactList"] as List<Contact>;
+}
+
+<div class="contact-list-container">
+    <div class="contact-list" id="contactList">
+        @foreach (Contact contact in contactList)
+        {
+            <a class="contact-item" asp-controller="Contact" asp-action="ContactDetails" asp-route-id="@contact.Id">
+                <div class="contact-list-item" id="@contact.Id">
+                    <h2>@contact.Name</h2>
+                    <p>@contact.Email</p>
+                    <p>@contact.Mobile </p>
+                </div>
+            </a>
+        }
+    </div>
+</div>

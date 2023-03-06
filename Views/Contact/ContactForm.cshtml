@@ -1,0 +1,53 @@
+﻿@model Contact
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.title = "Contact Form";
+}
+
+<div class="modal-bg-block" id="modalBackgroundBlock">
+    <div class="contact-form-modal" id="contactFormContainer">
+        <div class="modal-content" id="modalContent">
+            <span class="close-btn" id="close"><a href="/Contact/CloseForm" style="text-decoration:none">&times;</a></span>
+            <form class="contact-form" id="contactForm" method="post">
+                <div class="form-field">
+                    <label asp-for="Name">Name<span asp-validation-for="Name" class="mandatory-field"></span></label>
+                    <input type="text" asp-for="Name" id="name" name="name">
+                </div>
+                <div class="form-field">
+                    <label asp-for="Email">Email<span asp-validation-for="Email" class="mandatory-field"></span></label>
+                    <input type="text" asp-for="Email" id="email" name="email">
+                </div>
+                <div class="contact-field">
+                    <div class="form-field">
+                        <label asp-for="Mobile">Mobile<span asp-validation-for="Mobile" class="mandatory-field"></span></label>
+                        <input type="text" asp-for="Mobile" id="mobile" name="mobile">
+                    </div>
+                    <div class="form-field">
+                        <label asp-for="Landline">Landline</label>
+                        <input type="text" asp-for="Landline" id="landline" name="landline">
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label asp-for="Website">Website</label>
+                    <input type="text" asp-for="Website" id="website" name="website">
+                </div>
+                <div class="form-field">
+                    <label asp-for="Address">Address</label>
+                    <textarea id="address" asp-for="Address" name="address" rows="4"></textarea>
+                </div>
+
+                <div class="form-btn-container" id="btnContainer">
+                    @if (Model == null)
+                    {
+                        <button type="submit" id="addBtn" class="add-btn">Add</button>
+                    }
+                    else
+                    {
+                        <button type="submit" id="updateBtn" class="update-btn">Update</button>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

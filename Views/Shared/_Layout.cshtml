@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.title - AddressBook</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <h1 class="header-title">Address book</h1>
+    </div>
+    <div class="nav">
+        <div class="nav-menu">
+            <ul class="nav-list">
+                <li class="nav-item"><a id="home" href="/Contact/Index">Home</a></li>
+                <li class="nav-item"><a id="add" href="/Contact/ContactForm">+Add</a></li>
+            </ul>
+        </div>
+        <div class="blog-image">
+            <img src="~/images/blog-icon.png" alt="blog">
+        </div>
+    </div>
+    <div class="content" id="content">
+        <h3>Contacts</h3>
+        <div class="contacts-content" id="contact">
+
+            @(await Component.InvokeAsync("ContactList"))
+
+            <div class="contact-details-container" id="contactDetailsContainer">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    @RenderSection("scripts",required: false)
+</body>
+</html>

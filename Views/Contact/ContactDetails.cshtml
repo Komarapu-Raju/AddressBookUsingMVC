@@ -1,0 +1,29 @@
+﻿@model Contact
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.title = "Contact Details";
+}
+
+<div class="contact-details">
+    <div class="contact-heading">
+        <h2 id="contactName">@Model.Name</h2>
+        <div class="contact-details-menu" id="contactDetailsOptions">
+            <a href="/Contact/ContactForm/@Model.Id"><span id="editContact"><img class="edit-icon" src="~/images/pen.png"><p>Edit</p></span></a>
+            <a href="/Contact/DeleteContact/@Model.Id"><span id="deleteContact"><img class="delete-icon" src="~/images/trash.png"><p>Delete</p></span></a>
+        </div>
+    </div>
+    <span class="email-details"><p>Email: @Model.Email </p><p id="contactEmail"></p></span>
+    <div class="mobile-details">
+        <span><p>Mobile: </p><p id="contactMobile">@Model.Mobile</p></span>
+        <span><p>Landline: </p><p id="contactLandline">@Model.Landline</p></span>
+    </div>
+    <span class="website-details"><p>Website:</p><p id="contactWebsite">@Model.Website</p></span>
+    <div class="address-details"><p>Adress:</p><p id="contactAddress">@Model.Address</p></div>
+</div>
+
+@section scripts{
+    <script>
+        $('#' + @Model.Id).css('background-color', "#CEE7F2");
+    </script>
+    }
