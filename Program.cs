@@ -1,4 +1,5 @@
 using AddressBook.DBConnection;
+using AddressBook.Helpers;
 using AddressBook.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IContactServices, ContactServices>();
 
 builder.Services.AddSingleton<IDBConnection, DBConnection>();
+
+builder.Services.AddAutoMapper(typeof(ContactMapper).Assembly);
 
 var app = builder.Build();
 

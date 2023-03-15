@@ -1,10 +1,10 @@
 ﻿@{
-    var contactList = ViewData["contactList"] as List<Contact>;
+    var contactList = ViewData["contactList"] as List<ContactListViewModel>;
 }
 
 <div class="contact-list-container">
     <div class="contact-list" id="contactList">
-        @foreach (Contact contact in contactList)
+        @foreach (ContactListViewModel contact in contactList)
         {
             <a class="contact-item" asp-controller="Contact" asp-action="ContactDetails" asp-route-id="@contact.Id">
                 <div class="contact-list-item" id="@contact.Id">

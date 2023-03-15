@@ -1,5 +1,7 @@
 ﻿using AddressBook.DBConnection;
 using AddressBook.Models;
+using AddressBook.ViewModels;
+using AutoMapper;
 using Dapper;
 using Microsoft.Data.SqlClient;
 
@@ -9,9 +11,12 @@ namespace AddressBook.Services
     {
         private readonly SqlConnection _sqlConnection;
 
-        public ContactServices(IDBConnection dbAccess)
+        private readonly IMapper mapper;
+
+        public ContactServices(IDBConnection dbAccess,IMapper mapper)
         {
             _sqlConnection = dbAccess.GetSqlConnection();
+            this.mapper = mapper;
         }
 
         public void AddContact(Contact newContact)
@@ -32,16 +37,16 @@ namespace AddressBook.Services
             _sqlConnection.Execute(query, new { ID = id });
         }
 
-        public Contact GetContactById(int id)
+        public ContactDetailsViewModel GetContactById(int id)
         {
             string query = "SELECT * FROM ContactsTable WHERE ID = @ID";
-            return _sqlConnection.QuerySingleOrDefault<Contact>(query, new { ID = id });
+            return mapper.Map<ContactDetailsViewModel>(_sqlConnection.QuerySingleOrDefault<Contact>(query, new { ID = id }));
         }
 
-        public List<Contact> GetContactsList()
+        public List<ContactListViewModel> GetContactsList()
         {
             var sql = "SELECT * FROM ContactsTable";
-            return _sqlConnection.Query<Contact>(sql).ToList();
+            return mapper.Map<List<ContactListViewModel>>(_sqlConnection.Query<Contact>(sql).ToList());
         }
 
         public bool DoesContactExist(int id)

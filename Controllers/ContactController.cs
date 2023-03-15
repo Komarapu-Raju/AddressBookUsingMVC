@@ -1,5 +1,6 @@
 ﻿using AddressBook.Models;
 using AddressBook.Services;
+using AddressBook.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AddressBook.Controllers
@@ -20,7 +21,7 @@ namespace AddressBook.Controllers
 
         public IActionResult EditContact(int id)
         {
-            return View("ContactForm",_contactServices.GetContactById(id));
+            return View("ContactForm", _contactServices.GetContactById(id));
         }
 
         [HttpPost]
@@ -35,7 +36,7 @@ namespace AddressBook.Controllers
                 }
 
                 _contactServices.AddContact(contact);
-                return RedirectToAction("ContactDetails", new { _contactServices.GetContactsList().Last<Contact>().Id });
+                return RedirectToAction("ContactDetails", new { _contactServices.GetContactsList().Last<ContactListViewModel>().Id });
             }
 
             return View(contact);
@@ -54,7 +55,7 @@ namespace AddressBook.Controllers
 
         public IActionResult Index()
         {
-            Contact contact = _contactServices.GetContactsList().FirstOrDefault();
+            ContactListViewModel? contact = _contactServices.GetContactsList().FirstOrDefault();
 
             if (contact != null)
             {

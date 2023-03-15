@@ -1,4 +1,5 @@
 ﻿using AddressBook.Models;
+using AddressBook.ViewModels;
 
 namespace AddressBook.Services
 {
@@ -10,9 +11,9 @@ namespace AddressBook.Services
 
         void DeleteContact(int id);
 
-        Contact GetContactById(int id);
+        ContactDetailsViewModel GetContactById(int id);
 
-        List<Contact> GetContactsList();
+        List<ContactListViewModel> GetContactsList();
 
         bool DoesContactExist(int id);
     }
